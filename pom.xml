@@ -19,29 +19,21 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M5</version>
+                    <configuration>
+                        <suiteXmlFiles>
+                            <suiteXmlFile>defaultTestSuite.xml</suiteXmlFile>
+                        </suiteXmlFiles>
+                        <systemPropertyVariables>
+                            <allure.results.directory>target/allure-results</allure.results.directory>
+                        </systemPropertyVariables>
+                    </configuration>
+                </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>defaultTestSuite</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <suiteXmlFileName>defaultTestSuite</suiteXmlFileName>
-            </properties>
-        </profile>
-        <profile>
-            <id>aut_default</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <properties>
-                <config.location.aut>configuration/aut_default.xml</config.location.aut>
-            </properties>
-        </profile>
-    </profiles>
 
     <dependencies>
 
@@ -49,6 +41,12 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
             <version>3.8.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.0.0-M5</version>
         </dependency>
 
         <dependency>
@@ -89,6 +87,13 @@
             <artifactId>annotations</artifactId>
             <version>16.0.1</version>
             <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-selenide</artifactId>
+            <version>2.13.6</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

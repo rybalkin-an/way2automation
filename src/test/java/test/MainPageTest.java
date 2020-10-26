@@ -1,11 +1,13 @@
 package test;
 
+import io.qameta.allure.Epic;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.QuickContactForm;
 
+@Epic("Тестирование главной страницы http://way2automation.com/")
 public class MainPageTest extends BaseTest{
 
     private final String email = "testEmail";
@@ -48,7 +50,7 @@ public class MainPageTest extends BaseTest{
         String jmeter = mainPage.getCourseSectionById().get(3).getText();
 
         Assert.assertEquals(selenium, "SELENIUM\nSelenium is an open source automation testing tool for web based applications. It runs directly on a web browser such as Firefox, chrome, IE, Opera, Safari etc., and supports...");
-        Assert.assertEquals(appium, "APPIUM\nAppium is the most demanding Mobile application automation testing tool that can automate all types of Native, Hybrid and Webapp on Real Iphone / Android Devices and Simulators...");
+        Assert.assertEquals(appium, "FailAPPIUM\nAppium is the most demanding Mobile application automation testing tool that can automate all types of Native, Hybrid and Webapp on Real Iphone / Android Devices and Simulators...");
         Assert.assertEquals(protractor, "PROTRACTOR\nLearn and master all advance concepts on Protracor which are require to automate AngularJS and non angular applications. The tool itself is in high demand in market get Life time support in your queries...");
         Assert.assertEquals(jmeter, "JMETER\nEver thought of getting live experience on Performance testing of Webapps in any training course? Yes its possible now, with W2A you will learn all advance concepts of Performance...");
     }

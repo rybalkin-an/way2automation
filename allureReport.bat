@@ -1,0 +1,1 @@
+allure serve C:\Users\Leshjke\IdeaProjects\way2automation\target\allure-results
