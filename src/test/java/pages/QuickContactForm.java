@@ -2,7 +2,6 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
-
 import static com.codeborne.selenide.Selenide.$x;
 
 public class QuickContactForm {
@@ -39,12 +38,12 @@ public class QuickContactForm {
         return this;
     }
 
-    @Step("Проверка отображения сообщения об ошибке")
-    public boolean emailFieldErrorMessageIsDisplayed(){
-        return emailFieldErrorMessage.isDisplayed();
+    @Step("Получение сообщения об ошибке")
+    public SelenideElement getEmailFieldErrorMessage(){
+        return emailFieldErrorMessage;
     }
 
-    @Step("Проверка отображения сообщения об ошибке")
+    @Step("Нажатие кнопки 'Submit'")
     public QuickContactForm clickSubmitButton(){
         submitButton.click();
         return this;

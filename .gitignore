@@ -4,5 +4,4 @@
 build/*
 target/*
 allure-results
-README.md.md
-allureReport.bat
+/allureReport.bat

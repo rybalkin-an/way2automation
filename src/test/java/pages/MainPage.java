@@ -1,21 +1,25 @@
 package pages;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import java.util.List;
+import io.qameta.allure.Step;
 import static com.codeborne.selenide.Selenide.*;
 
 public class MainPage {
 
     private final SelenideElement quickContactField = $x("//section[@style=\"visibility: visible; animation-duration: 2s; animation-name: bounceInRight;\"]");
-    private final List<SelenideElement> coursesSection = $$x("//section[@class='section-default'][1]//div[@class='posts-wrap']//article");
+    private final ElementsCollection coursesSection = $$x("//section[@class='section-default'][1]//div[@class='posts-wrap']//article");
 
-    public Class<QuickContactForm> waitLoadingQuickContactForm() {
-        quickContactField.isDisplayed();
+    @Step("Ожидание загрузки Quick Contact формы")
+    public QuickContactForm waitLoadingQuickContactForm() {
+        quickContactField.waitUntil(Condition.visible, 4500);
         switchTo().frame(2);
-        return QuickContactForm.class;
+        return new QuickContactForm();
     }
 
-    public List<SelenideElement> getCourseSectionById() {
+    @Step("Проскролить страницу до кусров")
+    public ElementsCollection getCourseSectionById() {
         coursesSection.get(0).scrollIntoView(false);
         return coursesSection;
     }
