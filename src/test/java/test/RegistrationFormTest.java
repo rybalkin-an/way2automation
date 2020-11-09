@@ -6,10 +6,11 @@ import io.qameta.allure.Epic;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.RegistrationForm;
+import java.io.IOException;
 import java.util.Set;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -23,13 +24,18 @@ public class RegistrationFormTest extends BaseTest {
     private final CookieManager cookieManager;
     private Set<Cookie> cookieSet;
 
-    public RegistrationFormTest() {
+    public RegistrationFormTest() throws IOException {
+        super();
         cookieManager = new CookieManager();
+    }
+
+    @BeforeMethod(description = "Открытие страницы http://way2automation.com/way2auto_jquery/index.php")
+    public void setUpMethod() {
+        open(baseUrl + path);
     }
 
     @Test(description = "Заполнение формы регистрации и сохранение кукисов сессии в файл")
     public void testRegistrationForm() {
-        open(baseUrl + path);
         new RegistrationForm()
                 .cityFieldSendKeys("SamaraCity")
                 .emailFieldSendKeys(name + "@mail.com")
@@ -45,11 +51,9 @@ public class RegistrationFormTest extends BaseTest {
         Assert.assertEquals(WebDriverRunner.getWebDriver().manage().getCookies().size(), 2);
     }
 
-    @Test(description = "Провекра работоспособности сохранненых кукисов",
-            dependsOnMethods = "testRegistrationForm")
+    @Test(description = "Провекра работоспособности сохранненых кукисов")
     public void testLoginWithCookie() {
-        WebDriver driver = new ChromeDriver();
-        driver.navigate().to(baseUrl + path);
+        WebDriver driver = WebDriverRunner.getWebDriver();
         driver.manage().deleteAllCookies();
         cookieSet = cookieManager.getCookiesFromFile();
         for (Cookie cookie : cookieSet) {
@@ -59,7 +63,6 @@ public class RegistrationFormTest extends BaseTest {
 
         Assert.assertNotNull(driver.manage().getCookieNamed("__zlcmid"));
         Assert.assertNotNull(driver.manage().getCookieNamed("PHPSESSID"));
-        driver.quit();
     }
 
 }

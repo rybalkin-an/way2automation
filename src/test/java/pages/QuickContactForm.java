@@ -48,4 +48,8 @@ public class QuickContactForm {
         submitButton.click();
         return this;
     }
+
+    public SelenideElement getPhoneNumber() {
+        return phoneNumberField;
+    }
 }

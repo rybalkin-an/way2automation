@@ -1,10 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Suite">
-    <test name="DefaultTestSuite">
+<suite name="Suite" thread-count="2" parallel="tests" verbose="1">
+
+    <listeners>
+        <listener class-name="helpers.AnnotationTransformer"/>
+    </listeners>
+
+    <test name="chromeSuite">
+        <parameter name="browserName" value="chrome"/>
         <classes>
             <class name="test.MainPageTest"/>
+            <class name="test.ScrollTest"/>
+            <class name="test.RegistrationFormTest"/>
         </classes>
     </test>
+
+    <test name="firefoxSuite">
+        <parameter name="browserName" value="firefox"/>
+        <classes>
+            <class name="test.MainPageTest"/>
+            <class name="test.ScrollTest"/>
+            <class name="test.RegistrationFormTest"/>
+        </classes>
+    </test>
+
+<!--    <test name="operaSuite">-->
+<!--        <parameter name="browserName" value="opera"/>-->
+<!--        <classes>-->
+<!--            <class name="test.MainPageTest"/>-->
+<!--            <class name="test.ScrollTest"/>-->
+<!--            <class name="test.RegistrationFormTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
 </suite>

@@ -2,17 +2,14 @@ package helpers;
 
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.Cookie;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class CookieManager {
 
-    String fileName = "Cookies.data";
-    File file;
+    private String fileName = "configuration/Cookies.data";
+    private File file;
 
     public CookieManager() {
         file = new File(fileName);
@@ -64,9 +61,8 @@ public class CookieManager {
                     String value = token.nextToken();
                     String domain = token.nextToken();
                     String path = token.nextToken();
-                    Date expiry = new SimpleDateFormat("yyyyMMdd").parse(date.toString());
                     boolean isSecure = Boolean.parseBoolean(token.nextToken());
-                    Cookie cookie = new Cookie(name, value, domain, path, expiry, isSecure);
+                    Cookie cookie = new Cookie(name, value, domain, path, date, isSecure);
                     cookies.add(cookie);
                 }
             } return cookies;
